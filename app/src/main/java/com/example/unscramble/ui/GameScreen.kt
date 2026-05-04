@@ -87,6 +87,7 @@ fun GameScreen(
                 gameViewModel.updateUserGuess(userGuess)
             },
             onKeyboardDone = { gameViewModel.checkUserGuess() },
+            isGuessWrong = gameUiState.isGuessWordWrong,
             modifier = Modifier
                 .fillMaxWidth()
                 .wrapContentHeight()
@@ -146,7 +147,8 @@ fun GameLayout(
     userGuess: String,
     onUserGuessChanged: (String) -> Unit,
     onKeyboardDone: () -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    isGuessWrong: Boolean
 ) {
     val mediumPadding = dimensionResource(R.dimen.padding_medium)
 
@@ -189,8 +191,13 @@ fun GameLayout(
                     disabledContainerColor = colorScheme.surface,
                 ),
                 onValueChange = onUserGuessChanged,
-                label = { Text(stringResource(R.string.enter_your_word)) },
-                isError = false,
+                label = {
+                    if (isGuessWrong)
+                        Text(stringResource(R.string.wrong_guess))
+                    else
+                        Text(stringResource(R.string.enter_your_word))
+                },
+                isError = isGuessWrong,
                 keyboardOptions = KeyboardOptions.Default.copy(
                     imeAction = ImeAction.Done
                 ),
