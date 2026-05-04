@@ -62,14 +62,23 @@ class GameViewModel : ViewModel() {
     }
 
     fun advanceToNextWord(updatedScore: Int) {
-        _uiState.update {
-            it.copy(
-                currentWordCount = it.currentWordCount.inc(),
-                currentScrambledWord = pickRandomAndShuffle(),
-                isGuessedWordWrong = false,
-                score = updatedScore
-            )
-        }
+        if (_uiState.value.currentWordCount == 10)
+            _uiState.update {
+                it.copy(
+                    isGameOver = true,
+                    isGuessedWordWrong = false,
+                    score = updatedScore
+                )
+            }
+        else
+            _uiState.update {
+                it.copy(
+                    currentWordCount = it.currentWordCount.inc(),
+                    currentScrambledWord = pickRandomAndShuffle(),
+                    isGuessedWordWrong = false,
+                    score = updatedScore
+                )
+            }
     }
 
     fun skipWord() {
