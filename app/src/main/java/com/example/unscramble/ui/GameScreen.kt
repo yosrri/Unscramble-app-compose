@@ -83,8 +83,9 @@ fun GameScreen(
             currentScrambledWord = gameUiState.currentScrambledWord,
             userGuess = gameViewModel.userGuess,
             onUserGuessChanged = { userGuess ->
-                gameViewModel.onUserGuessChanged(userGuess)
+                gameViewModel.updateUserGuess(userGuess)
             },
+            onKeyboardDone = {},
             modifier = Modifier
                 .fillMaxWidth()
                 .wrapContentHeight()
@@ -100,7 +101,9 @@ fun GameScreen(
 
             Button(
                 modifier = Modifier.fillMaxWidth(),
-                onClick = { }
+                onClick = {
+                    if (gameViewModel.userGuess == )
+                }
             ) {
                 Text(
                     text = stringResource(R.string.submit),
@@ -141,6 +144,7 @@ fun GameLayout(
     currentScrambledWord: String,
     userGuess: String,
     onUserGuessChanged: (String) -> Unit,
+    onKeyboardDone: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     val mediumPadding = dimensionResource(R.dimen.padding_medium)
@@ -190,7 +194,7 @@ fun GameLayout(
                     imeAction = ImeAction.Done
                 ),
                 keyboardActions = KeyboardActions(
-                    onDone = { }
+                    onDone = { onKeyboardDone}
                 )
             )
         }
