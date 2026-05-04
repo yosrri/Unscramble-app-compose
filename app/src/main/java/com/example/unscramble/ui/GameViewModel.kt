@@ -51,7 +51,7 @@ class GameViewModel : ViewModel() {
 
     fun checkUserGuess() {
         if (userGuess.equals(currentWord, ignoreCase = true)) {
-            guessedRight()
+            advanceToNextWord(uiState.value.score + SCORE_INCREASE)
         } else {
             _uiState.update { currentState ->
                 currentState.copy(isGuessedWordWrong = true)
@@ -61,13 +61,13 @@ class GameViewModel : ViewModel() {
         updateUserGuess("")
     }
 
-    fun guessedRight() {
+    fun advanceToNextWord(updatedScore: Int) {
         _uiState.update {
             it.copy(
                 currentWordCount = it.currentWordCount.inc(),
                 currentScrambledWord = pickRandomAndShuffle(),
                 isGuessedWordWrong = false,
-                score = it.score + SCORE_INCREASE
+                score = updatedScore
             )
         }
     }
