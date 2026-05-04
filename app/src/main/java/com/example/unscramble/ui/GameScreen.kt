@@ -57,7 +57,6 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.unscramble.R
 import com.example.unscramble.ui.theme.UnscrambleTheme
-import org.w3c.dom.Text
 
 @Composable
 fun GameScreen(
@@ -87,7 +86,7 @@ fun GameScreen(
                 gameViewModel.updateUserGuess(userGuess)
             },
             onKeyboardDone = { gameViewModel.checkUserGuess() },
-            isGuessWrong = gameUiState.isGuessWordWrong,
+            isGuessWrong = gameUiState.isGuessedWordWrong,
             modifier = Modifier
                 .fillMaxWidth()
                 .wrapContentHeight()
