@@ -64,6 +64,7 @@ class GameViewModel : ViewModel() {
     fun guessedRight() {
         _uiState.update {
             it.copy(
+                currentWordCount = it.currentWordCount.inc(),
                 currentScrambledWord = pickRandomAndShuffle(),
                 isGuessedWordWrong = false,
                 score = it.score + SCORE_INCREASE
@@ -71,7 +72,7 @@ class GameViewModel : ViewModel() {
         }
     }
 
-    
+
 
     fun resetGame() {
         usedWords.clear()
