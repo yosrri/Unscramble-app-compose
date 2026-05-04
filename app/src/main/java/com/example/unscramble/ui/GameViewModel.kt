@@ -72,7 +72,10 @@ class GameViewModel : ViewModel() {
         }
     }
 
-
+    fun skipWord() {
+        advanceToNextWord(uiState.value.score)
+        updateUserGuess("")
+    }
 
     fun resetGame() {
         usedWords.clear()
