@@ -57,11 +57,12 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.unscramble.R
 import com.example.unscramble.ui.theme.UnscrambleTheme
+import org.w3c.dom.Text
 
 @Composable
 fun GameScreen(
     gameViewModel: GameViewModel = viewModel()
-    ) {
+) {
     val mediumPadding = dimensionResource(R.dimen.padding_medium)
     val gameUiState by gameViewModel.uiState.collectAsState()
 
@@ -85,7 +86,7 @@ fun GameScreen(
             onUserGuessChanged = { userGuess ->
                 gameViewModel.updateUserGuess(userGuess)
             },
-            onKeyboardDone = {},
+            onKeyboardDone = { gameViewModel.checkUserGuess() },
             modifier = Modifier
                 .fillMaxWidth()
                 .wrapContentHeight()
@@ -102,7 +103,7 @@ fun GameScreen(
             Button(
                 modifier = Modifier.fillMaxWidth(),
                 onClick = {
-                    if (gameViewModel.userGuess == )
+                    gameViewModel.checkUserGuess()
                 }
             ) {
                 Text(
@@ -194,7 +195,7 @@ fun GameLayout(
                     imeAction = ImeAction.Done
                 ),
                 keyboardActions = KeyboardActions(
-                    onDone = { onKeyboardDone}
+                    onDone = { onKeyboardDone() }
                 )
             )
         }
