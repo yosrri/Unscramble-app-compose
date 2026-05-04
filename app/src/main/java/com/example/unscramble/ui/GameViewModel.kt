@@ -44,7 +44,7 @@ class GameViewModel : ViewModel() {
         return String(shuffledWord)
     }
 
-    fun onUserGuessChanged(userGuessInput: String) {
+    fun updateUserGuess(userGuessInput: String) {
         userGuess = userGuessInput
     }
 
