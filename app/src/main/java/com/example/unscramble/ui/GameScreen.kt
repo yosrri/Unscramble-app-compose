@@ -81,7 +81,7 @@ fun GameScreen(
         )
         GameLayout(
             currentScrambledWord = gameUiState.currentScrambledWord,
-            userGuess = gameViewModel.userGuess.value,
+            userGuess = gameViewModel.userGuess,
             onUserGuessChanged = { userGuess ->
                 gameViewModel.onUserGuessChanged(userGuess)
             },
